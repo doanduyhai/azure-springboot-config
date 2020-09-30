@@ -1,0 +1,24 @@
+azure:
+  keyvault:
+    enabled: true
+    uri: https://testkvduyhai.vault.azure.net/
+  table:
+    enabled: true
+    storage-account-name: msifortest
+    table-name: BackendConfig
+
+app:
+  val1:
+  val2:
+  val3:
+  myList:
+  myMap:
+  myOauth2Config:
+    dev:
+      oauthEndpoint:
+      clientId:
+      clientKey:
+    prod:
+      oauthEndpoint:
+      clientId:
+      clientKey:
