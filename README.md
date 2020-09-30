@@ -197,6 +197,6 @@ With the above example, we illustrate the usage combination of Key Vault and Azu
 
 # F. Sample application
 
-There is a sample application to illustrate how the library works in the `src/main/test` folder
+There is a sample application to illustrate how the library works in the `src/main/it` folder
 
  
