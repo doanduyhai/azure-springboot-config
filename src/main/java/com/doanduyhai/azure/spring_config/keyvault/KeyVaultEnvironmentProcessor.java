@@ -3,9 +3,7 @@
 
 package com.doanduyhai.azure.spring_config.keyvault;
 
-import static com.doanduyhai.azure.spring_config.Constants.AZURE_KEYVAULT_PROPERTYSOURCE_NAME;
-import static com.doanduyhai.azure.spring_config.Constants.AZURE_SPRING_KEY_VAULT;
-import static com.doanduyhai.azure.spring_config.Constants.DEFAULT_REFRESH_INTERVAL_MS;
+import static com.doanduyhai.azure.spring_config.Constants.*;
 import static java.lang.String.format;
 import static org.springframework.core.env.StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME;
 
@@ -45,7 +43,7 @@ public class KeyVaultEnvironmentProcessor {
         this.environment = environment;
         Validator.validateNotNull(environment, "Spring configurable environment");
         vaultUri = getPropertyValue(Property.URI);
-        Validator.validateNotBlank(vaultUri, "azure.keyvault.uri");
+        Validator.validateNotBlank(vaultUri, AZURE_KEYVAULT_URI);
         secretClient = new SecretClientBuilder()
                 .vaultUrl(vaultUri)
                 .credential(MSI_TOKEN_CREDENTIALS)
