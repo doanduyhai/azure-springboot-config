@@ -21,4 +21,8 @@ public class Constants {
 
     public static final long DEFAULT_REFRESH_INTERVAL_MS = 1800000L;
 
+    public static final String AZURE_TABLE_ENABLED_KEY = "azure.table.enabled";
+    public static final String AZURE_KEYVAULT_ENABLED_KEY = "azure.keyvault.enabled";
+    public static final String AZURE_KEYVAULT_URI = "azure.keyvault.uri";
+
 }

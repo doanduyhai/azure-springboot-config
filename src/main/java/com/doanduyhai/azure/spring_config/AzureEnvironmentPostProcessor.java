@@ -13,6 +13,8 @@
  */
 package com.doanduyhai.azure.spring_config;
 
+import static com.doanduyhai.azure.spring_config.Constants.AZURE_TABLE_ENABLED_KEY;
+import static com.doanduyhai.azure.spring_config.Constants.AZURE_KEYVAULT_ENABLED_KEY;
 import static com.doanduyhai.azure.spring_config.azure_table.AzureTableProperties.CONNECTION_STRING_KEYVAUL_SECRET_NAME_PATTERN;
 import static com.doanduyhai.azure.spring_config.utils.Validator.validateTrue;
 import static java.lang.String.format;
@@ -43,7 +45,6 @@ public class AzureEnvironmentPostProcessor implements EnvironmentPostProcessor, 
 
     public static final int DEFAULT_ORDER = ConfigFileApplicationListener.DEFAULT_ORDER + 1;
     private int order = DEFAULT_ORDER;
-
 
     private static final DeferredLog logger = new DeferredLog();
 
@@ -99,14 +100,14 @@ public class AzureEnvironmentPostProcessor implements EnvironmentPostProcessor, 
                 true);
 
         if (tableEnabled) {
-            validateTrue(isKeyVaultEnabled(environment), "If 'azure.table.enabled' = true then 'azure.keyvault.enabled' should be true and the key vault configured properly");
+            validateTrue(isKeyVaultEnabled(environment), format("If '%s' = true then '%s' should be true and the key vault configured properly", AZURE_TABLE_ENABLED_KEY, AZURE_KEYVAULT_ENABLED_KEY));
             String storageAccountNameProperty = AzureTableProperties.getPropertyName(AzureTableProperties.Property.STORAGE_ACCOUNT_NAME);
             String storageAccountName = environment.getProperty(storageAccountNameProperty);
-            validateTrue(StringUtils.isNotBlank(storageAccountName), format("If 'azure.table.enabled' = true, then you should provide the property '%s'", storageAccountNameProperty));
+            validateTrue(StringUtils.isNotBlank(storageAccountName), format("If '%s' = true, then you should provide the property '%s'", AZURE_TABLE_ENABLED_KEY, storageAccountNameProperty));
 
             String tableNameProperty = AzureTableProperties.getPropertyName(AzureTableProperties.Property.TABLE_NAME);
             String tableName = environment.getProperty(tableNameProperty);
-            validateTrue(StringUtils.isNotBlank(tableName), format("If 'azure.table.enabled' = true, then you should provide the property '%s'", tableNameProperty));
+            validateTrue(StringUtils.isNotBlank(tableName), format("If '%s' = true, then you should provide the property '%s'", AZURE_TABLE_ENABLED_KEY, tableNameProperty));
 
             String keyVaultSecretName = format(CONNECTION_STRING_KEYVAUL_SECRET_NAME_PATTERN, storageAccountName);
             String tableConnectionString = keyVaultHelper.getKeyVaultSecret(keyVaultSecretName);
