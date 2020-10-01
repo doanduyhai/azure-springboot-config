@@ -3,14 +3,15 @@ Azure Spring Boot Config
 
 # A. Overview
 
-This library allows any Spring Boot application to retrieve its properties from Azure Key Vault and/or Azure Storage table. The advantage of this library is that is does not require any authentication secret or password (**passwordless properties retrieval**). Rather, the library retrieves at **runtime** all necessary credentials to access the key vault/azure tables using Azure Managed Identity
+This library allows any Spring Boot application to retrieve its properties from Azure Key Vault and/or Azure Storage table. The advantage of this library is that is does not require any authentication secret or password (**passwordless properties retrieval**). Rather, the library retrieves at **runtime** all necessary credentials to access the key vault/azure tables using Azure User Assigned Managed Identity (**MSI**)
 
 Consequently, the clear pre-requisites are:
 
 1. you have to deploy the Spring Boot application on either Azure Container Instances(ACI), VMs or Azure Kubernetes Service (AKS)
-2. you have to configure correct **Access Policy** on the key vault to the MSI assigned to your VMs, AKS or ACI
+2. you have to create an User Assigne Managed Identity
+3. you have to configure correctly **Access Policy** on the key vault to the MSI assigned to your VMs, AKS or ACI
 
-> Note: this library is inspired by https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot/src/main/java/com/microsoft/azure/keyvault/spring but it does not support multiple key vault and adds the support for Azure table. Also this library only support authentication using MSI which is the most secured way to retrieve secrets in Azure
+> Note: this library is inspired by https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot/src/main/java/com/microsoft/azure/keyvault/spring but it does not support multiple key vaults and adds the support for Azure table. Also this library only supports authentication using MSI which is the most secured way to retrieve secrets in Azure
 
 # B. Concept
 
@@ -114,7 +115,7 @@ To use this library:
                   
 # E. Examples 
 
-You can find a sample application in the folder `src/test/java`. For this sample application, the `application.yaml` is:
+You can find a sample application in the folder `src/it/java`. For this sample application, the `application.yaml` is:
 
 ```yaml
 azure:
@@ -197,6 +198,6 @@ With the above example, we illustrate the usage combination of Key Vault and Azu
 
 # F. Sample application
 
-There is a sample application to illustrate how the library works in the `src/main/it` folder
+There is a sample application to illustrate how the library works in the `src/it/java` folder
 
  
